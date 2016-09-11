@@ -7,7 +7,7 @@
 - [x] Make a git
 - [x] Simple i/o, print statements
 - [x] Function runs
-- [ ] immediate stop function
+- [x] immediate stop function
 
 ## technologies involved:
 python3

@@ -8,7 +8,7 @@ import time
 # class for processing multiple objects at a limit
 # speed of calls is determined by calls per time in seconds.
 # 
-class task_processing(threading.Thread): #
+class task_processing(threading.Thread):
 	def  __init__(self, q_size, calls, time_seconds, lock_timeout = 10):
 		threading.Thread.__init__(self)
 
@@ -32,7 +32,6 @@ class task_processing(threading.Thread): #
 
 	# runs while-loop that runs the jobs queued
 	def run(self):
-		print('starting task thread')
 		while not self.stop:
 			if not self.q.empty():
 				self.cv.acquire()
@@ -42,7 +41,6 @@ class task_processing(threading.Thread): #
 				func, args, kwargs = params['func'], params['args'], params['kwargs']
 				func(*args, **kwargs)
 				self.counter += 1
-		print('stopping task thread')
 
 	# the rate limiter, which checks the elapsed time and the number of calls made
 	# when the limit on calls is reached and it is not yet time to reset
@@ -67,11 +65,10 @@ class task_processing(threading.Thread): #
 		
 	# submit a stop command to the queue
 	def enq_stop(self):
-		self.q.put({'func':self.stop_cmd, 'args':(), 'kwargs':{}})
-		print('stop command issued')
+		self.q.put({'func':self.imm_stop, 'args':(), 'kwargs':{}})
 
-	def stop_cmd(self):
-		self.counter = 0
+	#immediately stops task processing.
+	def imm_stop(self):
 		self.stop = True
 
 
@@ -85,7 +82,7 @@ if __name__ == '__main__':
 	processing.start()
 	for i in range(10):
 		processing.enq(my_print, str(i)) 
-	processing.enq_stop()
+	processing.imm_stop()
 	processing.join()
 	
 	
