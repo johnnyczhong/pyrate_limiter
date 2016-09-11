@@ -6,7 +6,8 @@
 ### todo:
 - [x] Make a git
 - [x] Simple i/o, print statements
-- [ ] Function runs
+- [x] Function runs
+- [ ] immediate stop function
 
 ## technologies involved:
 python3
