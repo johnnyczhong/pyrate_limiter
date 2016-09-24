@@ -5,7 +5,7 @@
 	import rate_limiter
 
 ###to instantiate your own object:
-	my_rate_limited_queue = rate_limiter.task_processing(*q_size*, *calls*, *time_seconds*, *lock_timeout* *=* *10*)
+	my_rate_limited_queue = rate_limiter.task_processing(q_size, calls, time_seconds, lock_timeout = 10)
 	all arguments are type int
 	q_size: size of queue
 	calls/time_seconds: how many function calls are allowed for allotted time_seconds. 
@@ -17,7 +17,7 @@
 
 
 ###enqueue a function and its arguments!
-	my_rate_limited_queue.enq(*func*, **args*, *add_counter* = *True*, ***kwargs*)
+	my_rate_limited_queue.enq(func, *args, add_counter = True, **kwargs)
 	add_counter: as an option, enqueue a function that doesn't count against the rate by specifying as False. 
 	by default, this is true the queue counts all functions against the rate limit.
 
