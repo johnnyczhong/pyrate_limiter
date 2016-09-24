@@ -19,15 +19,18 @@
 
 ###enqueue a function and its arguments!
 	my_rate_limited_queue.enq(func, *args, add_counter = True, **kwargs)
+	
 	add_counter: as an option, enqueue a function that doesn't count against the rate by specifying as False. 
 	by default, this is true the queue counts all functions against the rate limit.
 
 ###enqueue the stop:
 	my_rate_limited_queue.enq_stop()
+	
 	this function will enqueue the stop command, terminating the queue and the thread.
 
 ###stop immediately:
 	my_rate_limited_queue.imm_stop()
+	
 	this function sends the stop command immediately and terminates the queue at the next loop evaluation. 
 
 ###more stuff about python multithreading here:
